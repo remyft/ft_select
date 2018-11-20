@@ -6,18 +6,11 @@
 /*   By: rfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 04:43:09 by rfontain          #+#    #+#             */
-/*   Updated: 2018/11/20 05:26:59 by rfontain         ###   ########.fr       */
+/*   Updated: 2018/11/20 05:53:35 by rfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
-
-t_mln		*go_end(t_mln *lst)
-{
-	while (lst && lst->next)
-		lst = lst->next;
-	return (lst);
-}
 
 t_mln		*get_argv(char **av)
 {

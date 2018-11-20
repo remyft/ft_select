@@ -6,7 +6,7 @@
 #    By: rfontain <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/28 20:50:45 by rfontain          #+#    #+#              #
-#    Updated: 2018/11/20 04:59:10 by rfontain         ###   ########.fr        #
+#    Updated: 2018/11/20 05:53:11 by rfontain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,13 @@ INCS = -I $(LIB_PATH)/ -I $(INC_DIR)
 
 SRCS_DIR = src/
 SRCS =	ft_select.c			\
-		list_tool.c		\
+		list_tool.c			\
 		signal.c			\
 		arrow_key.c			\
 		key.c				\
 		termcaps.c			\
+		tools.c				\
+
 
 OK =      $(GREEN)[OK]$(RESET)		
 

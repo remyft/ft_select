@@ -6,7 +6,7 @@
 /*   By: rfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 04:35:32 by rfontain          #+#    #+#             */
-/*   Updated: 2018/11/20 05:25:33 by rfontain         ###   ########.fr       */
+/*   Updated: 2018/11/20 05:48:13 by rfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	down_key(t_slct *env)
 	int		max_elem;
 
 	i = 0;
-	max_elem = (env->nb_col / (env->max_len + 1) - 1);
+	max_elem = (env->nb_col / (env->max_len + 1));
 	env->lst->udline = 0;
 	while (env->lst->next && i < max_elem)
 	{
@@ -60,7 +60,7 @@ void	up_key(t_slct *env)
 	int		max_elem;
 
 	i = 0;
-	max_elem = (env->nb_col / (env->max_len + 1) - 1);
+	max_elem = (env->nb_col / (env->max_len + 1));
 	env->lst->udline = 0;
 	while (env->lst->prev && i < max_elem)
 	{

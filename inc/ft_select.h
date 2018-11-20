@@ -6,7 +6,7 @@
 /*   By: rfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 04:45:04 by rfontain          #+#    #+#             */
-/*   Updated: 2018/11/20 05:16:05 by rfontain         ###   ########.fr       */
+/*   Updated: 2018/11/20 05:52:49 by rfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void				put_list(t_slct *env);
 void				ft_loop(void);
 
 void				deal_exit(t_slct *env);
-t_mln				*go_end(t_mln *lst);
 void				select_key(t_slct *env);
 void				unselect_key(t_slct *env);
 void				enter_key(t_slct *env);
@@ -83,5 +82,9 @@ void				sig_exit(int sig);
 void				sig_tstp(int sig);
 void				sig_cont(int sig);
 void				sig_winch(int sig);
+
+t_mln				*go_end(t_mln *lst);
+void				free_env(void);
+void				free_mln(void);
 
 #endif

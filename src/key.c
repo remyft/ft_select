@@ -6,7 +6,7 @@
 /*   By: rfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 04:36:41 by rfontain          #+#    #+#             */
-/*   Updated: 2018/11/20 05:04:07 by rfontain         ###   ########.fr       */
+/*   Updated: 2018/11/20 05:52:16 by rfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	unselect_key(t_slct *env)
 	else
 		env->end = env->lst->prev;
 	if (env->lst)
-		free(env->lst);
+		free_mln();
 	else
 		deal_exit(env);
 	env->lst = save;
