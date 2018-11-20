@@ -6,7 +6,7 @@
 /*   By: rfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 04:36:41 by rfontain          #+#    #+#             */
-/*   Updated: 2018/11/20 05:52:16 by rfontain         ###   ########.fr       */
+/*   Updated: 2018/11/20 19:20:36 by rfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	unselect_key(t_slct *env)
 		tputs(tgetstr("cl", NULL), 1, ft_pchar);
 		deal_exit(env);
 	}
+	env->nb_elem -= 1;
 	save = env->lst->next ? env->lst->next : env->begin;
 	if (env->lst && env->lst->prev)
 		env->lst->prev->next = env->lst->next;
@@ -47,7 +48,6 @@ void	unselect_key(t_slct *env)
 		deal_exit(env);
 	env->lst = save;
 	env->lst->udline = 1;
-	tputs(tgetstr("cl", NULL), 1, ft_pchar);
 	put_list(env);
 }
 
@@ -74,7 +74,6 @@ void	enter_key(t_slct *env)
 		}
 		env->lst = env->lst->next;
 	}
-	close(env->fd);
 	exit(0);
 }
 

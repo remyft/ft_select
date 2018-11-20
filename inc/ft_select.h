@@ -6,7 +6,7 @@
 /*   By: rfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 04:45:04 by rfontain          #+#    #+#             */
-/*   Updated: 2018/11/20 05:52:49 by rfontain         ###   ########.fr       */
+/*   Updated: 2018/11/20 20:05:04 by rfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,22 @@
 # include <sys/ioctl.h>
 # include "libft.h"
 
-# define ESC_KEY 27
-# define ARROW_K1 27
-# define ARROW_K2 91
-# define UP 65
-# define DOWN 66
-# define RIGHT 67
-# define LEFT 68
+# define UP_KEY "\x1B\x5B\x41"
+# define DOWN_KEY "\x1B\x5B\x42"
+# define RIGHT_KEY "\x1B\x5B\x43"
+# define LEFT_KEY "\x1B\x5B\x44"
+# define ESC_KEY "\x1B"
+# define ENTER_KEY "\xA"
+# define SELECT_KEY "\x20"
+# define ERASE_KEY1 "\x7F"
+# define ERASE_KEY2 "\x1B\x5B\x33\x7E"
 
 typedef struct		s_mln
 {
-	char			*str;
 	int				udline;
 	int				selec;
+	int				pos;
+	char			*str;
 	struct s_mln	*next;
 	struct s_mln	*prev;
 }					t_mln;
