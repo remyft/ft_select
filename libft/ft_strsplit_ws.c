@@ -6,7 +6,7 @@
 /*   By: rfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 07:55:26 by rfontain          #+#    #+#             */
-/*   Updated: 2018/10/09 19:41:02 by rfontain         ###   ########.fr       */
+/*   Updated: 2018/11/20 05:30:36 by rfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ static	int		ft_strlensp(const char *str)
 		i++;
 	return (i);
 }
-
-#include <stdio.h>
 
 char			**ft_strsplit_ws(char const *s)
 {

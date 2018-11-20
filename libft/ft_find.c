@@ -6,7 +6,7 @@
 /*   By: rfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 09:01:24 by rfontain          #+#    #+#             */
-/*   Updated: 2018/10/06 09:10:59 by rfontain         ###   ########.fr       */
+/*   Updated: 2018/11/20 05:30:02 by rfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	ft_find(char *src, char *to_find, int *beg, int *end)
 			while (src[*beg + *end] && src[*beg + *end] == to_find[*end])
 				*end += 1;
 			if (*end == (int)ft_strlen(to_find))
-				break;
+				break ;
 		}
 }

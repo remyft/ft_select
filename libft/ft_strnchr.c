@@ -6,7 +6,7 @@
 /*   By: rfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/29 18:33:53 by rfontain          #+#    #+#             */
-/*   Updated: 2018/10/29 18:49:15 by rfontain         ###   ########.fr       */
+/*   Updated: 2018/11/20 05:30:24 by rfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strnchr(const char *str, char c, int n)
 	while (str[++i])
 		if (str[i] == c)
 			if (++oc == n)
-				break;
+				break ;
 	if (oc == n)
 		return (&find[i]);
 	return (NULL);
