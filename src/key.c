@@ -6,7 +6,7 @@
 /*   By: rfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 04:36:41 by rfontain          #+#    #+#             */
-/*   Updated: 2018/11/20 19:20:36 by rfontain         ###   ########.fr       */
+/*   Updated: 2018/11/21 04:40:40 by rfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	select_key(t_slct *env)
 	env->lst->udline = 0;
 	env->lst = env->lst->next ? env->lst->next : env->begin;
 	env->lst->udline = 1;
-	tputs(tgetstr("cl", NULL), 1, ft_pchar);
 	put_list(env);
 }
 
@@ -29,7 +28,6 @@ void	unselect_key(t_slct *env)
 	if (!env->lst->next && !env->lst->prev)
 	{
 		free(env->lst);
-		tputs(tgetstr("cl", NULL), 1, ft_pchar);
 		deal_exit(env);
 	}
 	env->nb_elem -= 1;
@@ -84,4 +82,22 @@ void	deal_exit(t_slct *env)
 	tputs(tgetstr("ve", NULL), 1, ft_pchar);
 	tputs(tgetstr("te", NULL), 1, ft_pchar);
 	exit(0);
+}
+
+void	deal_alpha(t_slct *env, char c)
+{
+	int	spos;
+
+	spos = env->lst->pos;
+	env->lst->udline = 0;
+	env->lst = env->lst->next ? env->lst->next : env->begin;
+	while ((env->lst->str)[0] != ft_toupper(c)
+			&& (env->lst->str)[0] != ft_tolower(c))
+	{
+		env->lst = env->lst->next ? env->lst->next : env->begin;
+		if (env->lst->pos == spos)
+			break ;
+	}
+	env->lst->udline = 1;
+	put_list(env);
 }

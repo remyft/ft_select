@@ -6,7 +6,7 @@
 /*   By: rfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 04:43:09 by rfontain          #+#    #+#             */
-/*   Updated: 2018/11/20 20:48:18 by rfontain         ###   ########.fr       */
+/*   Updated: 2018/11/21 04:41:08 by rfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 static t_mln	*get_next(char **av, t_mln *prev)
 {
-	t_mln	*curr;
-	int		len;
+	t_mln		*curr;
+	int			len;
+	struct stat	fstat;
 
 	curr = NULL;
 	if (*av)
@@ -25,6 +26,7 @@ static t_mln	*get_next(char **av, t_mln *prev)
 		curr->prev = prev;
 		curr->str = ft_strdup(*av);
 		len = ft_strlen(*av);
+		curr->stat = lstat(*av, &fstat) == -1 ? 0 : fstat.st_mode;
 		env.max_len = len > env.max_len ? len : env.max_len;
 		env.nb_elem += 1;
 		curr->pos = env.nb_elem;
@@ -35,16 +37,18 @@ static t_mln	*get_next(char **av, t_mln *prev)
 
 t_mln			*get_argv(char **av)
 {
-	t_mln	*begin;
+	t_mln		*begin;
+	struct stat	fstat;
 
 	if (!(begin = (t_mln *)ft_memalloc(sizeof(t_mln))))
 		return (NULL);
 	begin->str = ft_strdup(av[1]);
 	env.max_len = ft_strlen(av[1]);
+	begin->stat = lstat(av[1], &fstat) == -1 ? 0 : fstat.st_mode;
 	begin->udline = 1;
 	env.nb_elem = 1;
 	begin->pos = env.nb_elem;
-	begin->next = get_next(&av[1], begin);
+	begin->next = get_next(&av[2], begin);
 	return (begin);
 }
 
@@ -52,6 +56,7 @@ static void		ft_putchars_fd(char c, int nb, int fd)
 {
 	while (nb--)
 		ft_putchar_fd(c, fd);
+	ft_putstr_fd(RESET, fd);
 }
 
 void			put_list(t_slct *env)
@@ -60,7 +65,7 @@ void			put_list(t_slct *env)
 	int		max_put;
 	int		i;
 
-	tputs(tgetstr("cl", NULL), 1, ft_pchar);
+	tputs(tgetstr("ti", NULL), 1, ft_pchar);
 	if (!env->is_print)
 		return (ft_putendl_fd("Please resize your window.", STDERR_FILENO));
 	max_put = (env->nb_col / (env->max_len + 1)) - 1;
@@ -72,7 +77,7 @@ void			put_list(t_slct *env)
 			tputs(tgetstr("us", NULL), 1, ft_pchar);
 		if (curr->selec)
 			tputs(tgetstr("mr", NULL), 1, ft_pchar);
-		ft_putstr_fd(curr->str, 0);
+		putstr_col_fd(curr->str, curr->stat, 0);
 		tputs(tgetstr("ue", NULL), 1, ft_pchar);
 		ft_putchars_fd(' ', env->max_len - ft_strlen(curr->str) + 1, 0);
 		if (i == max_put)
@@ -83,7 +88,7 @@ void			put_list(t_slct *env)
 	}
 }
 
-void		ft_loop(void)
+void			ft_loop(void)
 {
 	int				nb_read;
 	char			buff[11];
@@ -99,7 +104,6 @@ void		ft_loop(void)
 		{ ERASE_KEY1, &unselect_key },
 		{ ERASE_KEY2, &unselect_key } };
 
-	ft_bzero(buff, 11);
 	while (1)
 	{
 		nb_read = read(0, buff, 10);
@@ -108,5 +112,7 @@ void		ft_loop(void)
 		while (++i < 9)
 			if (ft_strcmp(buff, fctn[i].key) == 0)
 				fctn[i].f(&env);
+		if (nb_read == 1 && ft_isalpha(buff[0]))
+			deal_alpha(&env, buff[0]);
 	}
 }

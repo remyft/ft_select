@@ -6,7 +6,7 @@
 /*   By: rfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 04:38:26 by rfontain          #+#    #+#             */
-/*   Updated: 2018/11/20 05:03:37 by rfontain         ###   ########.fr       */
+/*   Updated: 2018/11/29 17:45:56 by rfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	sig_exit(int sig)
 {
 	(void)sig;
-	tputs(tgetstr("cl", NULL), 1, ft_pchar);
 	deal_exit(&env);
 }
 
@@ -56,7 +55,6 @@ void	sig_winch(int sig)
 	tgetent(NULL, term);
 	nb_col = tgetnum("co");
 	nb_line = tgetnum("li");
-	tputs(tgetstr("cl", NULL), 1, ft_pchar);
 	if (nb_col != env.nb_col)
 		env.nb_col = nb_col;
 	if (nb_line != env.nb_line)

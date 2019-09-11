@@ -6,7 +6,7 @@
 /*   By: rfontain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 04:45:04 by rfontain          #+#    #+#             */
-/*   Updated: 2018/11/20 20:05:04 by rfontain         ###   ########.fr       */
+/*   Updated: 2018/11/21 04:34:23 by rfontain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <termios.h>
 # include <term.h>
 # include <signal.h>
+# include <sys/stat.h>
 # include <sys/ioctl.h>
 # include "libft.h"
 
@@ -35,6 +36,7 @@ typedef struct		s_mln
 	int				udline;
 	int				selec;
 	int				pos;
+	mode_t			stat;
 	char			*str;
 	struct s_mln	*next;
 	struct s_mln	*prev;
@@ -75,6 +77,7 @@ void				deal_exit(t_slct *env);
 void				select_key(t_slct *env);
 void				unselect_key(t_slct *env);
 void				enter_key(t_slct *env);
+void				deal_alpha(t_slct *env, char c);
 
 void				left_key(t_slct *env);
 void				right_key(t_slct *env);
@@ -89,5 +92,6 @@ void				sig_winch(int sig);
 t_mln				*go_end(t_mln *lst);
 void				free_env(void);
 void				free_mln(void);
+void				putstr_col_fd(char *str, mode_t stat, int fd);
 
 #endif
